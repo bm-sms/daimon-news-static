@@ -1,0 +1,2 @@
+client: (cd .. && bundle exec middleman server)
+api: bundle exec rackup -p 9991
