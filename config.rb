@@ -70,3 +70,10 @@ configure :build do
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 end
+
+activate :data_source do |c|
+  c.root  = "http://localhost:9991"
+  c.files = [
+    "posts.json",
+  ]
+end
