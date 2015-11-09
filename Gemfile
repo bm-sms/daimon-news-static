@@ -3,6 +3,8 @@
 source 'https://rubygems.org'
 
 gem "middleman", "~>3.4.0"
+gem "activesupport", require: "active_support/json"  # workaround for middleman-data_source
+gem "middleman-data_source"
 
 # Live-reloading plugin
 gem "middleman-livereload", "~> 3.1.0"
