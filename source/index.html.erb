@@ -2,10 +2,7 @@
 title: Welcome to Middleman
 ---
 
-<div class="welcome">
-  <h1>Middleman is Watching</h1>
-  <p class="doc">
-    <%= link_to "Read Online Documentation", "http://middlemanapp.com/" %>
-    <%= data.posts %>
-  </p><!-- .doc -->
-</div><!-- .welcome -->
+<h1>Posts</h1>
+<%- data.posts.each do |post| %>
+  <p><%= link_to "#{post.title}", "/posts/#{post.id}.html" %></p>
+<%- end %>

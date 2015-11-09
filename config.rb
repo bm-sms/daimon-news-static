@@ -77,3 +77,7 @@ activate :data_source do |c|
     "posts.json",
   ]
 end
+
+data.posts.each do |post|
+  proxy "/posts/#{post.id}.html", "/post.template.html", locals: {post: post}, ignore: true
+end
