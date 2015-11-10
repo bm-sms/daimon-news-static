@@ -1,4 +1,6 @@
 require "thor"
+require "tmpdir"
+require "fileutils"
 
 module DaimonNewsStatic
   module Generator
@@ -11,7 +13,18 @@ module DaimonNewsStatic
         File.join(File.dirname(__FILE__), "template", "build")
       end
 
-      def create_files
+      def create_site
+        Dir.mktmpdir do |dir|
+          generate_templates(dir)
+          FileUtils.cd(dir) do
+            system("middleman", "build")
+          end
+          FileUtils.mv(File.join(dir, "build"), name)
+        end
+      end
+
+      private
+      def generate_templates(dir)
         [
           "source/javascripts/all.js",
           "source/layouts/layout.erb",
@@ -24,7 +37,7 @@ module DaimonNewsStatic
           "Gemfile.lock",
         ].each do |path|
           template("#{path}.tt",
-                   "#{name}/#{path}")
+                   "#{dir}/#{path}")
         end
       end
     end
