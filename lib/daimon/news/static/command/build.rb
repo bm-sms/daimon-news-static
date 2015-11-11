@@ -58,7 +58,7 @@ module Daimon
               FileUtils.cd(tmpdir) do
                 system("middleman", "build")
               end
-              FileUtils.mv(File.join(tmpdir, "build"), @name)
+              true
             end
           end
 
@@ -80,6 +80,7 @@ module Daimon
               if File.file?("#{source_path}.erb")
                 source = ERB.new(File.read("#{source_path}.erb"))
                 name = @name
+                build_dir = File.expand_path(@name)
                 File.write(dist_path, source.result(binding))
               else
                 FileUtils.cp(source_path, dist_path)
