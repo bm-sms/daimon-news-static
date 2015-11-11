@@ -1,6 +1,7 @@
 require "erb"
 require "tmpdir"
 require "fileutils"
+require "optparse"
 
 module Daimon
   module News
@@ -19,6 +20,7 @@ module Daimon
           end
 
           def run(arguments)
+            @options = parse_options(arguments)
             if arguments.size < 1
               $stderr.puts("#{$0}: missing site name")
               $stderr.puts(USAGE)
@@ -29,6 +31,16 @@ module Daimon
           end
 
           private
+          def parse_options(arguments)
+            options = {}
+
+            parser = OptionParser.new("#{$0} SITE_NAME")
+
+            parser.parse!(arguments)
+
+            options
+          end
+
           def source_root
             File.join(File.dirname(__FILE__), "..", "templates", "default")
           end
