@@ -7,6 +7,8 @@ module Daimon
     module Static
       module Command
         class Build
+          USAGE = "Usage: #{$0} SITE_NAME"
+
           class << self
             def run(*arguments)
               new.run(arguments)
@@ -17,6 +19,11 @@ module Daimon
           end
 
           def run(arguments)
+            if arguments.size < 1
+              $stderr.puts("#{$0}: missing site name")
+              $stderr.puts(USAGE)
+              return false
+            end
             @name = arguments.shift
             create_site
           end
