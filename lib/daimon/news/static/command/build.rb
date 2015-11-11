@@ -52,17 +52,17 @@ module Daimon
           end
 
           def create_site
-            Dir.mktmpdir do |dir|
-              generate_templates(dir)
-              replace_templates(dir)
-              FileUtils.cd(dir) do
+            Dir.mktmpdir do |tmpdir|
+              generate_templates(tmpdir)
+              replace_templates(tmpdir)
+              FileUtils.cd(tmpdir) do
                 system("middleman", "build")
               end
-              FileUtils.mv(File.join(dir, "build"), @name)
+              FileUtils.mv(File.join(tmpdir, "build"), @name)
             end
           end
 
-          def generate_templates(dir)
+          def generate_templates(tmpdir)
             [
               "source/javascripts/all.js",
               "source/layouts/layout.erb",
@@ -76,19 +76,19 @@ module Daimon
             ].each do |path|
               source_path = File.join(source_root, "#{path}.tt")
               source = ERB.new(File.read(source_path))
-              dist_path = File.join(dir, path)
+              dist_path = File.join(tmpdir, path)
               FileUtils.mkdir_p(File.dirname(dist_path))
               File.write(dist_path, source.result)
             end
           end
 
-          def replace_templates(dir)
+          def replace_templates(tmpdir)
             return unless @options[:template_path]
             Dir.glob("#{@options[:template_path]}/*") do |path|
               basename = File.basename(path)
               case basename
               when "stylesheets", "stylesheet", "css"
-                css_dist_path = File.join(dir, "source", "stylesheets")
+                css_dist_path = File.join(tmpdir, "source", "stylesheets")
                 FileUtils.rm_r(css_dist_path)
                 FileUtils.cp_r(path, css_dist_path)
               end
