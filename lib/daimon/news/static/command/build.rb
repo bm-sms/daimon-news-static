@@ -74,7 +74,7 @@ module Daimon
               "Gemfile",
               "Gemfile.lock",
             ].each do |path|
-              source_path = File.join(source_root, "#{path}.tt")
+              source_path = File.join(source_root, "#{path}.erb")
               source = ERB.new(File.read(source_path))
               dist_path = File.join(tmpdir, path)
               FileUtils.mkdir_p(File.dirname(dist_path))
