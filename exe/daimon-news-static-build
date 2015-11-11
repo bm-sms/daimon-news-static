@@ -2,4 +2,4 @@
 
 require "daimon/news/static/command/build"
 
-Daimon::News::Static::Command::Build.run(*ARGV)
+exit Daimon::News::Static::Command::Build.run(*ARGV)
