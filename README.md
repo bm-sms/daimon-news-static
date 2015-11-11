@@ -10,4 +10,5 @@ A news site generating tool.
 
 ## Usage
 
+    $ bin/run-api-mock &
     $ daimon-news-static-build NAME

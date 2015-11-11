@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require "sinatra/base"
+require "sinatra/json"
+
+class App < Sinatra::Base
+  set :port, 9991
+
+  get "/posts.json" do
+    posts = [
+      {
+        id: 1,
+        title: "Post1",
+        body: "content..."
+      },
+      {
+        id: 2,
+        title: "Post2",
+        body: "content content content..."
+      },
+    ]
+    json posts
+  end
+
+  run! if app_file == $0
+end
