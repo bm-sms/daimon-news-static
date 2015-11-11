@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'daimon_news_static/version'
+require 'daimon/news/static/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "daimon_news_static"
-  spec.version       = DaimonNewsStatic::VERSION
+  spec.name          = "daimon-news-static"
+  spec.version       = Daimon::News::Static::VERSION
   spec.authors       = ["Masafumi Yokoyama"]
   spec.email         = ["yokoyama@clear-code.com"]
 
@@ -26,8 +26,6 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-
-  spec.add_runtime_dependency "thor"
 
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "rake", "~> 10.0"

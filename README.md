@@ -1,4 +1,4 @@
-# DaimonNewsStatic
+# daimon-news-static
 
 A news site generating tool.
 
@@ -20,5 +20,5 @@ Or install it yourself as:
 
 ## Usage
 
-    $ daimon-news-static build NAME
+    $ daimon-news-static-build NAME
 
