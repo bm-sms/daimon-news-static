@@ -2,6 +2,7 @@ require "erb"
 require "tmpdir"
 require "fileutils"
 require "optparse"
+require "daimon/news/static/version"
 
 module Daimon
   module News
@@ -35,6 +36,7 @@ module Daimon
             options = {}
 
             parser = OptionParser.new("#{$0} SITE_NAME")
+            parser.version = VERSION
 
             parser.parse!(arguments)
 
