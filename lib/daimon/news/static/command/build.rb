@@ -38,6 +38,10 @@ module Daimon
             parser = OptionParser.new("#{$0} SITE_NAME")
             parser.version = VERSION
 
+            parser.on("--template=PATH",
+                      "Specify custom template path") do |path|
+              options[:template_path] = path
+            end
             parser.parse!(arguments)
 
             options
@@ -50,6 +54,7 @@ module Daimon
           def create_site
             Dir.mktmpdir do |dir|
               generate_templates(dir)
+              replace_templates(dir)
               FileUtils.cd(dir) do
                 system("middleman", "build")
               end
@@ -74,6 +79,19 @@ module Daimon
               dist_path = File.join(dir, path)
               FileUtils.mkdir_p(File.dirname(dist_path))
               File.write(dist_path, source.result)
+            end
+          end
+
+          def replace_templates(dir)
+            return unless @options[:template_path]
+            Dir.glob("#{@options[:template_path]}/*") do |path|
+              basename = File.basename(path)
+              case basename
+              when "stylesheets", "stylesheet", "css"
+                css_dist_path = File.join(dir, "source", "stylesheets")
+                FileUtils.rm_r(css_dist_path)
+                FileUtils.cp_r(path, css_dist_path)
+              end
             end
           end
         end
