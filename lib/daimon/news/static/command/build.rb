@@ -79,7 +79,7 @@ module Daimon
               FileUtils.mkdir_p(File.dirname(dist_path))
               if File.file?("#{source_path}.erb")
                 source = ERB.new(File.read("#{source_path}.erb"))
-              File.write(dist_path, source.result)
+                File.write(dist_path, source.result)
               else
                 FileUtils.cp(source_path, dist_path)
               end
