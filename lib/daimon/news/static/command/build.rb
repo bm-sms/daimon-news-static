@@ -56,7 +56,9 @@ module Daimon
               generate_templates(tmpdir)
               replace_templates(tmpdir)
               FileUtils.cd(tmpdir) do
-                system("middleman", "build")
+                # TODO: need?
+                # system("bundle", "install")
+                system("bundle", "exec", "middleman", "build")
               end
               true
             end
