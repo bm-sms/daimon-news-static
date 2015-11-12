@@ -34,3 +34,8 @@ default:
     ...
     $ ls custom/stylesheets
     user.css
+
+Scaffold user assets dir (experimental):
+
+    $ daimon-news-static-scaffold OUTPUT_PATH [SITE_NAME]
+

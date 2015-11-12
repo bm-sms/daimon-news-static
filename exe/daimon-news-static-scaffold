@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "daimon/news/static/command/scaffold"
+
+exit Daimon::News::Static::Command::Scaffold.run(*ARGV)
