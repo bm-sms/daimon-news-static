@@ -22,6 +22,7 @@ module Daimon
 
           def run(arguments)
             @options = parse_options(arguments)
+            @template = @options[:template] || "default"
             if arguments.size < 1
               $stderr.puts("#{$0}: missing output path")
               $stderr.puts(USAGE)
@@ -42,13 +43,17 @@ module Daimon
             parser = OptionParser.new("#{$0} SITE_NAME")
             parser.version = VERSION
 
+            parser.on("--template=NAME",
+                      "Switch project template: default, bootstrap") do |name|
+              options[:template] = name
+            end
             parser.parse!(arguments)
 
             options
           end
 
           def source_root
-            File.join(File.dirname(__FILE__), "..", "templates", "default")
+            File.join(File.dirname(__FILE__), "..", "templates", @template)
           end
 
           def scaffold_user_assets_dir(tmpdir)
