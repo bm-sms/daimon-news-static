@@ -98,6 +98,10 @@ module Daimon
                 css_dist_path = File.join(tmpdir, "source", "stylesheets")
                 FileUtils.rm_r(css_dist_path)
                 FileUtils.cp_r(path, css_dist_path)
+              when "javascripts", "javascript", "js"
+                js_dist_path = File.join(tmpdir, "source", "javascripts")
+                FileUtils.rm_r(js_dist_path)
+                FileUtils.cp_r(path, js_dist_path)
               end
             end
           end
