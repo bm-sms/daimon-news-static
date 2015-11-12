@@ -22,6 +22,7 @@ module Daimon
 
           def run(arguments)
             @options = parse_options(arguments)
+            @template = @options[:template] || "default"
             if arguments.size < 1
               $stderr.puts("#{$0}: missing site name")
               $stderr.puts(USAGE)
@@ -42,13 +43,17 @@ module Daimon
                       "Specify customized assets path") do |path|
               options[:user_assets_dir] = path
             end
+            parser.on("--template=NAME",
+                      "Switch project template: default, bootstrap") do |name|
+              options[:template] = name
+            end
             parser.parse!(arguments)
 
             options
           end
 
           def source_root
-            File.join(File.dirname(__FILE__), "..", "templates", "default")
+            File.join(File.dirname(__FILE__), "..", "templates", @template)
           end
 
           def create_site
@@ -56,6 +61,9 @@ module Daimon
               generate_templates(tmpdir)
               replace_templates(tmpdir)
               FileUtils.cd(tmpdir) do
+                if File.file?("bower.json")
+                  system("bower", "install")
+                end
                 system("bundle", "install")
                 system("bundle", "exec", "middleman", "build")
               end
@@ -71,6 +79,7 @@ module Daimon
               "source/stylesheets/normalize.css",
               "source/index.html.erb",
               "source/post.template.html.erb",
+              "bower.json",
               "config.rb",
               "Gemfile",
               "Gemfile.lock",
@@ -83,7 +92,7 @@ module Daimon
                 name = @name
                 build_dir = File.expand_path(@name)
                 File.write(dist_path, source.result(binding))
-              else
+              elsif File.file?(source_path)
                 FileUtils.cp(source_path, dist_path)
               end
             end

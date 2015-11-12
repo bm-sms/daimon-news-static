@@ -39,3 +39,9 @@ Scaffold user assets dir (experimental):
 
     $ daimon-news-static-scaffold OUTPUT_PATH [SITE_NAME]
 
+#### `--tamplate`
+
+Switch a project template:
+
+    $ daimon-news-static-build tbs_site --template=bootstrap
+
