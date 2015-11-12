@@ -38,9 +38,9 @@ module Daimon
             parser = OptionParser.new("#{$0} SITE_NAME")
             parser.version = VERSION
 
-            parser.on("--template=PATH",
-                      "Specify custom template path") do |path|
-              options[:template_path] = path
+            parser.on("--user-assets-dir=PATH",
+                      "Specify customized assets path") do |path|
+              options[:user_assets_dir] = path
             end
             parser.parse!(arguments)
 
@@ -90,8 +90,8 @@ module Daimon
           end
 
           def replace_templates(tmpdir)
-            return unless @options[:template_path]
-            Dir.glob("#{@options[:template_path]}/*") do |path|
+            return unless @options[:user_assets_dir]
+            Dir.glob("#{@options[:user_assets_dir]}/*") do |path|
               basename = File.basename(path)
               case basename
               when "stylesheets", "stylesheet", "css"

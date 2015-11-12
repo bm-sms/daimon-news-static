@@ -15,7 +15,7 @@ A news site generating tool.
 
 ### Options
 
-#### `--template`
+#### `--user-assets-dir`
 
 default:
 
@@ -24,13 +24,13 @@ default:
     $ ls default/stylesheets
     default.css
 
-`--template` option is specified:
+`--user-assets-dir` option is specified:
 
     $ ls source/
     stylesheets
     $ ls source/stylesheets
     user.css
-    $ daimon-news-static-build custom --template=source
+    $ daimon-news-static-build custom --user-assets-dir=source
     ...
     $ ls custom/stylesheets
     user.css
