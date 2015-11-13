@@ -1,8 +1,0 @@
----
-title: <%= name %>
----
-
-<h1>Posts</h1>
-<%%- data.posts.each do |post| %>
-  <p><%%= link_to "#{post.title}", "/posts/#{post.id}.html" %></p>
-<%%- end %>
