@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require "daimon/news/static/runner"
+
+Daimon::News::Static::Runner.new.run(ARGV)
