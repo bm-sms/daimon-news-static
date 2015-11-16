@@ -45,3 +45,17 @@ Switch a project template:
 
     $ daimon-news-static-build tbs_site --template=bootstrap
 
+#### `--site-id`
+
+Specify site ID to use posts from [daimon-news-service](https://github.com/bm-sms/daimon-news-service) as API.
+
+Prepare:
+
+    $ cd daimon-news-service
+    $ bin/rails s
+    # Create site and posts
+
+Build:
+
+    $ daimon-news-static-build site_id_1 --site-id=1
+

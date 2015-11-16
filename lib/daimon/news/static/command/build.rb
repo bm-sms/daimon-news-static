@@ -47,6 +47,10 @@ module Daimon
                       "Switch project template: default, bootstrap") do |name|
               options[:template] = name
             end
+            parser.on("--site-id=ID",
+                      "Specify site ID for API") do |id|
+              options[:site_id] = id
+            end
             parser.parse!(arguments)
 
             options
@@ -91,6 +95,7 @@ module Daimon
                 source = ERB.new(File.read("#{source_path}.erb"))
                 name = @name
                 build_dir = File.expand_path(@name)
+                site_id = @options[:site_id]
                 File.write(dist_path, source.result(binding))
               elsif File.file?(source_path)
                 FileUtils.cp(source_path, dist_path)

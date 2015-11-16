@@ -74,7 +74,11 @@ configure :build do
 end
 
 activate :data_source do |c|
+  <% if site_id %>
+  c.root  = "http://localhost:3000/sites/<%= site_id %>"
+  <% else %>
   c.root  = "http://localhost:9991"
+  <% end %>
   c.files = [
     "posts.json",
   ]
